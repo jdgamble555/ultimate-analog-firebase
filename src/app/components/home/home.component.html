@@ -1,0 +1,23 @@
+<div class="text-center">
+    <h1 class="text-3xl font-semibold my-3">Analog Firebase App</h1>
+
+    @if (user().loading) {
+
+    <p>Loading...</p>
+
+    } @else if (user().data) {
+
+    <app-profile />
+
+    } @else if (user().error) {
+
+    <p class="text-red-500">Error: {{ user().error?.message }}</p>
+
+    } @else {
+
+    <button type="button" class="border p-2 rounded-md text-white bg-red-600" (click)="login()">
+        Signin with Google
+    </button>
+
+    }
+</div>
