@@ -22,7 +22,7 @@ export default defineConfig(() => ({
   plugins: [
     analog({
       ssr: true,
-      static: true,
+      static: false,
       nitro: {
         alias: {
           '@lib': resolve(__dirname, './src/app/lib'),
