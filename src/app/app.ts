@@ -9,6 +9,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   <nav class="flex gap-3 justify-center mt-5">
       <a routerLink="/">Home</a>
       <a routerLink="/about">About</a>
+      <a routerLink="/wall">Wall</a>
   </nav>
   `,
 })

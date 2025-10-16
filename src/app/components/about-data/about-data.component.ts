@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { LOGOUT, USER } from '@lib/firebase/auth.service';
+import { USER } from '@lib/firebase/auth.service';
+import { FIRESTORE_GET_DOC } from '@lib/firebase/firebase.service';
 
 @Component({
   selector: 'app-about-data',
@@ -9,5 +10,9 @@ import { LOGOUT, USER } from '@lib/firebase/auth.service';
 })
 export class AboutDataComponent {
   user = inject(USER);
-  logout = inject(LOGOUT);
+  getDoc = inject(FIRESTORE_GET_DOC);
+
+  async getAboutPage() {
+    return await this.getDoc('/about/ZlNJrKd6LcATycPRmBPA');
+  }
 }
