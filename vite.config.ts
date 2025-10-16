@@ -21,15 +21,15 @@ export default defineConfig(() => ({
   },
   plugins: [
     analog({
-      ssr: false,
+      ssr: true,
       static: true,
-      vite: { experimental: { supportAnalogFormat: true } },
       nitro: {
         alias: {
           '@lib': resolve(__dirname, './src/app/lib'),
           '@services': resolve(__dirname, './src/app/services'),
           '@components': resolve(__dirname, './src/app/components'),
-        }
+        },
+        preset: 'vercel-edge'
       },
       prerender: {
         routes: [],
