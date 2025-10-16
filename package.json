@@ -41,7 +41,6 @@
     "@angular/cli": "^20.0.0",
     "@angular/compiler-cli": "^20.0.0",
     "firebase": "^12.4.0",
-    "firebase-admin": "^13.5.0",
     "jsdom": "^22.0.0",
     "nitropack": "^2.12.7",
     "typescript": "~5.8.0",
