@@ -12,13 +12,13 @@ export type AboutDoc = {
 
 export const aboutDataResolver: ResolveFn<AboutDoc> = async () => {
 
-    const getDoc = inject(FIRESTORE_GET_DOC);
-
-    const meta = inject(Meta);
-    const title = inject(Title);
-    const schema = inject(Schema);
-
     return useAsyncTransferState('about', async () => {
+
+        const getDoc = inject(FIRESTORE_GET_DOC);
+
+        const meta = inject(Meta);
+        const title = inject(Title);
+        const schema = inject(Schema);
 
         const data = await getDoc<AboutDoc>('/about/ZlNJrKd6LcATycPRmBPA');
 
