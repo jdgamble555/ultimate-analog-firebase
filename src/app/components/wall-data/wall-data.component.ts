@@ -61,6 +61,7 @@ export default class WallDataComponent {
                         throw new Error(error.code);
                     }
 
+                    console.error(error);
                     throw error;
                 }
             }

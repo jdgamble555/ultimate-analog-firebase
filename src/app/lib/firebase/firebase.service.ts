@@ -80,8 +80,7 @@ export const FIRESTORE_GET_DOC = new InjectionToken(
                     };
 
                 } catch (e) {
-
-                    console.error(e);
+                    
                     return {
                         data: null,
                         error: e
