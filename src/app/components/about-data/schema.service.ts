@@ -1,16 +1,14 @@
-import { DOCUMENT, Inject, Injectable, Renderer2 } from "@angular/core";
+import { Injectable } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Injectable({ providedIn: 'root' })
 export class Schema {
-  constructor(
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
-  ) {}
+  constructor(private sanitizer: DomSanitizer) {}
 
-  setSchema(data: Record<string, unknown>) {
-    const script = this.renderer.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify(data);
-    this.renderer.appendChild(this.document.head, script);
+  // Build a SafeHtml JSON string for binding in a <script> tag
+  setSchema(data: Record<string, unknown>): SafeHtml {
+    // Escape "<" so the JSON can’t prematurely close the <script> tag
+    const json = JSON.stringify(data).replace(/</g, '\\u003c');
+    return this.sanitizer.bypassSecurityTrustHtml(json);
   }
 }
