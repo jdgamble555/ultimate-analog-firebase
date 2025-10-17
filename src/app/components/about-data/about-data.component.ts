@@ -1,18 +1,24 @@
-import { Component, inject } from '@angular/core';
-import { USER } from '@lib/firebase/auth.service';
-import { FIRESTORE_GET_DOC } from '@lib/firebase/firebase.service';
+import { Component } from '@angular/core';
+import { AboutDoc } from './about-data.resolver';
+import { injectResolver } from '@lib/utils';
+import { AsyncPipe } from '@angular/common';
+
 
 @Component({
-  selector: 'app-about-data',
-  standalone: true,
-  imports: [],
-  templateUrl: './about-data.component.html'
+    selector: 'app-about-data',
+    standalone: true,
+    imports: [AsyncPipe],
+    template: `
+    @if (about | async; as data) {
+    <div class="flex items-center justify-center my-5">
+        <div class="border w-[400px] p-5 flex flex-col gap-3">
+            <h1 class="text-3xl font-semibold">{{ data.name }}</h1>
+            <p>{{ data.description }}</p>
+        </div>
+    </div>
+    }
+    `
 })
-export class AboutDataComponent {
-  user = inject(USER);
-  getDoc = inject(FIRESTORE_GET_DOC);
-
-  async getAboutPage() {
-    return await this.getDoc('/about/ZlNJrKd6LcATycPRmBPA');
-  }
+export default class AboutDataComponent {
+    about = injectResolver<AboutDoc>('data');
 }
