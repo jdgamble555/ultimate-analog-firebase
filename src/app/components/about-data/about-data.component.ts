@@ -16,6 +16,9 @@ import { AsyncPipe } from '@angular/common';
             <p>{{ data.description }}</p>
         </div>
     </div>
+    <p class="text-center">
+        <a href="https://validator.schema.org/#url=https%3A%2F%2Fultimate-analog-firebase.vercel.app%2Fabout" target="_blank" class="text-blue-600 underline">Validate Schema.org Metadata</a>
+    </p>
     }
     `
 })
