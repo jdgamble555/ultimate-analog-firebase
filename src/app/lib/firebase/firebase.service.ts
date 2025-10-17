@@ -65,14 +65,28 @@ export const FIRESTORE_GET_DOC = new InjectionToken(
             const db = inject(FIREBASE_FIRESTORE);
             const platformID = inject(PLATFORM_ID);
             return async <T>(path: string) => {
-                const snap = isPlatformBrowser(platformID)
-                    ? await getDoc(doc(db, path))
-                    : await getDocLite(docLite(db, path));
 
-                if (!snap.exists()) {
-                    throw new Error(`Document at path "${path}" does not exist.`);
+                try {
+
+                    const snap = isPlatformBrowser(platformID)
+                        ? await getDoc(doc(db, path))
+                        : await getDocLite(docLite(db, path));
+                    if (!snap.exists()) {
+                        throw new Error(`Document at path "${path}" does not exist.`);
+                    }
+                    return {
+                        data: snap.data() as T,
+                        error: null
+                    };
+
+                } catch (e) {
+
+                    console.error(e);
+                    return {
+                        data: null,
+                        error: e
+                    };
                 }
-                return snap.data() as Promise<T>;
             }
         }
     }

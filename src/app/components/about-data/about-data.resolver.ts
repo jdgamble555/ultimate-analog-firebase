@@ -20,7 +20,18 @@ export const aboutDataResolver: ResolveFn<AboutDoc> = async () => {
         const title = inject(Title);
         const schema = inject(Schema);
 
-        const data = await getDoc<AboutDoc>('/about/ZlNJrKd6LcATycPRmBPA');
+        const {
+            data,
+            error
+        } = await getDoc<AboutDoc>('/about/ZlNJrKd6LcATycPRmBPA');
+
+        if (error) {
+            throw error;
+        }
+
+        if (!data) {
+            throw new Error('No data found');
+        }
 
         title.setTitle(data.name);
         meta.updateTag({

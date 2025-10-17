@@ -45,29 +45,35 @@ export default class WallDataComponent {
     getDoc = inject(FIRESTORE_GET_DOC);
 
     wall = resource({
-        
+
         loader: async () => {
 
-            try {
-                const data = await this.getDoc<WallDoc>('/secret/tJKWxu0ls6R0RyH1Atpb');
+            const {
+                data,
+                error
+            } = await this.getDoc<WallDoc>('/secret/tJKWxu0ls6R0RyH1Atpb');
 
-                if (isDevMode()) {
-                    console.log(data);
-                }
-
-                return data;
-
-            } catch (error) {
+            if (error) {
 
                 if (error instanceof FirebaseError) {
 
                     if (error.code === 'permission-denied') {
                         throw new Error(error.code);
                     }
-                }
 
-                throw error;
+                    throw error;
+                }
             }
+
+            if (!data) {
+                throw new Error('No data returned');
+            }
+
+            if (isDevMode()) {
+                console.log(data);
+            }
+
+            return data;
         }
     });
 }
